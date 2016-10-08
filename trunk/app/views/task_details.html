@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>任务详情</title>
+    {{include './include/common_header'}}
+</head>
+<body >
+  <div class="main" id="template_details">
+
+  </div>
+  <script type="text/template" id="template">
+    <div class="content">
+        <div data-am-widget="list_news" class="am-list-news " >
+        <!--列表标题-->
+            <div class="am-list-news-bd">
+                <ul class="am-list" >
+                   <!--缩略图在标题左边-->
+                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left am-text-middle">
+                        <div class="am-u-sm-3 am-list-thumb">
+                            <img src="{{config.file_server}}/view/${data.icon}.do" alt="logo" class="logo"/>
+                        </div>
+                        <div class=" am-u-sm-6 am-list-main" >
+                            <h3 class="am-list-item-hd"><a href="javascript:void(0)" class="title">${data.title}</a></h3>
+                            <div class="am-list-item-text green">${data.simpleDescript}</div>
+                            <div class="am-list-item-text gray">
+                            ${if data.type.code=="fen_xiang"}
+                            <span class="border_radius fenxiang">分享</span>
+                            ${else if data.type.code=="xia_zai"}
+                            <span class="border_radius xiazai">下载</span>
+                            ${else if data.type.code=="guan_zhu"}
+                            <span class="border_radius 关注">关注</span>
+                            ${/if}
+                             剩余金额${data.surplusMoney | moneyFormat}元</div>
+                        </div>
+                        <span class="am-u-sm-3 am-list-news-more am-fr money green">￥${data.money | moneyFormat} </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="line_height"></div>
+        <div data-am-widget="intro" class="am-intro am-cf am-intro-default task_txt">
+          <div class="line_title am-u-sm-12">
+            <span></span>
+            <h3>
+              任务流程
+            </h3>
+          </div>
+          <div class="am-g am-intro-bd">
+            <div class=" am-u-sm-12">
+              ${#data.executionFlow}
+            </div>
+          </div>
+            <div class="am-intro-more-bottom  am-u-sm-12">
+              <a class="am-btn am-btn-default btn btn_task"  href="javascript:void(0)" id="go_app">前往app完成任务</a>
+            </div>
+        </div>
+        <div class="line_height"></div>
+        <div data-am-widget="intro" class="am-intro am-cf am-intro-default task_txt">
+          <div class="line_title am-u-sm-12">
+            <span></span>
+            <h3>
+              任务详情
+            </h3>
+          </div>
+          <div class="am-g am-intro-bd">
+            <div class=" am-u-sm-12">
+              ${#data.details}
+            </div>
+          </div>
+
+        </div>
+   </div>
+  </script>
+
+  <script type="text/javascript" src="{{config.url}}/js/business/task_details.js"></script>
+</body>
+</html>
