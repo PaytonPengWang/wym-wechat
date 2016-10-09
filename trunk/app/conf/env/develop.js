@@ -8,8 +8,8 @@ export default {
   },
   "cache": {
     redisPort: 6379,
-    redisHost: '192.168.0.7',
-    redisPwd: '19940913wp'
+    redisHost: 'ad36b6f2ed004196.redis.rds.aliyuncs.com',
+    redisPwd: 'WANGpeng1994'
   },
   "sms": {
     sn: 'SDK-BBX-010-24327',
@@ -22,8 +22,8 @@ export default {
     appid : "wx35d60d6b610e0c83",
     appsecret : "f2b58c55d4bad018c6a74efa90ded192"
   },
-  //url: 'http://app.weiyunmei.cn/wechat_debug',
-  url : 'http://127.0.0.1:7004',
+  url: 'http://app.weiyunmei.cn/wechat_debug',
+  //url : 'http://127.0.0.1:7004',
   file_server : "http://file.weiyunmei.cn",
   port : 7004
 }

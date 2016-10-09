@@ -27,13 +27,14 @@ export default{
 		let __selfQuery = this.query;
 		this.checkQuery('page').default("1").toInt();
         this.checkQuery('rows').default("10").toInt();
-        
+        this.checkQuery('status').default('');
+
         var data  = yield this.httpUtils.request('/user/advertisement.do','get',{
         	paging : true,
         	pageNum : __selfQuery.page,
         	pageSize : 10,
         	"user.id":'8a0194be540da523015429c04fca0073',
-        	status:status
+        	status:__selfQuery.status
         });
         let result;
         if(null!==data.result){
@@ -54,7 +55,7 @@ export default{
 		let params = {
 			id : __selfParams.id
 		};
-		
+
 		var data =yield this.httpUtils.request('/advertisement/'+__selfParams.id+'.do','get',{
 			id:__selfParams.id
 		});
@@ -73,7 +74,7 @@ export default{
 		let params = {
 			id : __selfParams.id
 		};
-		
+
 		let data = yield this.httpUtils.request('/user/advertisement.do','get',{
 			advId : __selfParams.id,
 			userId:'8a0194be540da523015429c04fca0073'
