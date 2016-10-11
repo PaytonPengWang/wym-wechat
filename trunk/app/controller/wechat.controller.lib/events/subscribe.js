@@ -7,7 +7,9 @@ export default function*(){
 	});
 
 	if(data.status!=0){
-		this.throw("该微信用户不存在",500);
+		this.body = {
+			content : wx_user.nickname + '，欢迎您加入微云媒，当前尚未绑定微云媒账户，请立即绑定或注册，开启微云媒赚零花钱之旅。'
+		}
 	}else{
 		let ret = yield this.httpUtils.request('/user.do','put',{
 			id:data.result.id,
