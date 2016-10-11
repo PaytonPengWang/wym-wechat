@@ -100,6 +100,14 @@ var $_template = (s_selector,t_selector,data)=>{
   })
 };
 
+template.helper('taskFormat',(str) => {
+  return (str.substring(0,4));
+});
+
+template.helper('biliFormat',(str) => {
+  return Math.round(parseFloat(str)*100);
+})
+
 template.helper('moneyFormat',(str ,qz) => {
     str = parseFloat(str)/100;
     str = ""+str;

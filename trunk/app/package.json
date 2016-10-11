@@ -18,5 +18,8 @@
     "wym-cache": "^1.0.0",
     "wym-http-utils": "^1.0.5",
     "xml2js": "^0.4.17"
+  },
+  "scripts" : {
+    "start" : "nodemon app.js"
   }
 }

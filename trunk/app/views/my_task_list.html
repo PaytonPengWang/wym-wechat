@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>任务列表</title>
+    <title>我的任务</title>
     {{include './include/common_header'}}
 </head>
 <body>
@@ -28,14 +28,14 @@
   </div>
   <script type="text/template" id="template">
     ${each data}
-    <li id="${$value.id}" class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left am-text-middle task_item">
+    <li id="${$value.advertisement.id}" class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left am-text-middle task_item">
         <div class="am-u-sm-3 am-list-thumb">
             <img src="{{config.file_server}}/view/${$value.advertisement.icon}.do" alt="logo" class="logo"/>
 
         </div>
         <div class=" am-u-sm-6 am-list-main" >
-            <h3 class="am-list-item-hd"><a href="javascript:void(0)" class="title">${$value.advertisement.title}</a></h3>
-            <div class="am-list-item-text green">${$value.advertisement.simpleDescript}</div>
+            <h3 class="am-list-item-hd am-text-truncate"><a href="javascript:void(0)" class="title ">${$value.advertisement.title}</a></h3>
+            <div class="am-list-item-text green am-text-truncate">${$value.advertisement.simpleDescript}</div>
             <div class="am-list-item-text gray">
             ${if $value.advertisement.type.code="fen_xiang"}
             <span class="border_radius fenxiang">分享</span>
@@ -44,7 +44,7 @@
             ${else if $value.advertisement.type.code="guan_zhu"}
             <span class="border_radius guanzhu">关注</span>
             ${/if}
-             任务奖金￥${$value.advertisement.money | moneyFormat}</div>
+             任务奖金￥${$value.advertisement.userProportion | moneyFormat}</div>
         </div>
         ${if $value.status==0}
         <span class="am-u-sm-3 am-list-news-more am-fr money red">进行中</span>

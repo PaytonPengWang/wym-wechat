@@ -74,11 +74,13 @@ export default{
 		let params = {
 			id : __selfParams.id
 		};
+		console.info(params);
 
 		let data = yield this.httpUtils.request('/user/advertisement.do','get',{
 			advId : __selfParams.id,
 			userId:'8a0194be540da523015429c04fca0073'
 		});
+		console.info(data);
 
 		if(data.status==0){
 			let logsData = yield this.httpUtils.request('/user/advertisement/log.do','get',{
@@ -143,7 +145,7 @@ export default{
 		let advCount = yield this.httpUtils.request('/user/consume/log.do','get',{
 			"userId":userId
 		});
-		console.info(data);
+		
 		let advs = advCount.result[0];/*做任务数*/
 		let advmoney = advCount.result[1];/*任务收益*/
 
@@ -151,7 +153,11 @@ export default{
 			parentId:userId
 		});
 		let childs = childsData.result;/*粉丝数*/
-		let childMoney = childs*2;/*邀请粉丝收益*/
+		let childMoney = yield this.httpUtils.request('/invitation/log.do','get',{
+			parentId : userId
+		});
+		
+		childMoney = childMoney.result;
 
 		let fansData = yield this.httpUtils.request('/user/consume/log/fans.do','get',{
 			"user.id":userId
@@ -163,11 +169,11 @@ export default{
 		let childsP = childMoney/consumesCount;/*邀请粉丝收益占比*/
 		let fansP = fansMoney/consumesCount;/*粉丝贡献收益占比*/
 		this.body = {
-			consumesCount :consumesCount/100,
+			consumesCount :consumesCount,
 			advs:advs,
-			advmoney:advmoney/100,
+			advmoney:advmoney,
 			childs:childs,
-			childMoney:childMoney/100,
+			childMoney:childMoney,
 			fans:fans,
 			fansMoney:fansMoney,
 			advsP:advsP,

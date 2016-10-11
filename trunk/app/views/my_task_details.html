@@ -1,83 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>任务列表</title>
+    <title>任务详情</title>
     {{include './include/common_header'}}
+    <style type="text/css">
+      #timeline {overflow: hidden;margin: 4px auto; 
+position: relative;background: url('{{config.url}}/images/dot.gif') 93px center repeat-y;padding: 10px 0px;} 
+      #dates {width: 115px;height: 440px;overflow: hidden;float: left;} 
+      #dates li {list-style: none;width: 100px;height: 30px;line-height: 30px;font-size: 14px; font-weight: bold;color:#888;
+       padding-right:20px; text-align:right; background: url('{{config.url}}/images/biggerdot.png') 90px center no-repeat;} 
+      #issues {height: 440px;overflow: hidden;float: right;}     
+      #issues li {height: 30px;list-style: none;font-size: 14px;line-height: 30px;color:#aaa;} 
+    </style>
 </head>
 <body>
-  <header data-am-widget="header" class="am-header">
-    <div class="am-header-left am-header-nav">
-        <a href="#left-link" class="">
-          <i class="am-header-icon am-icon-chevron-left"></i>
-        </a>
-    </div>
-
-    <h1 class="am-header-title">
-       任务列表
-    </h1>
-  </header>
   <div class="main">
-      <div class="content">
-            <div data-am-widget="list_news" class="am-list-news " >
-            <!--列表标题-->
-                <div class="am-list-news-bd">
-                    <ul class="am-list">
-                       <!--缩略图在标题左边-->
-                        <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left am-text-middle">
-                            <div class="am-u-sm-3 am-list-thumb">
-                                <img src="images/icon_1.png" alt="logo" class="logo"/>
-                            </div>
-                            <div class=" am-u-sm-6 am-list-main" >
-                                <h3 class="am-list-item-hd"><a href="" class="title">优步</a></h3>
-                                <div class="am-list-item-text green">优步打车20元优惠</div>
-                                <div class="am-list-item-text gray"> <span class="border_radius fenxiang">分享</span> 剩余金额2666元</div>
-                            </div>
-                            <span class="am-u-sm-3 am-list-news-more am-fr money gray">已结束</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="line_height"></div>
-            <div data-am-widget="intro" class="am-intro am-cf am-intro-default">
-                555
-            </div>
-            <div class="line_height"></div>
-            <div data-am-widget="intro" class="am-intro am-cf am-intro-default task_txt" style="padding-top:0" >
-              <div class="list_title_line">
-                 <div>您可能感兴趣的</div>
-              </div>
-                <div data-am-widget="list_news" class="am-list-news ">
-            <!--列表标题-->
-                <div class="am-list-news-bd">
-                    <ul class="am-list">
-                       <!--缩略图在标题左边-->
-                        <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left am-text-middle">
-                            <div class="am-u-sm-3 am-list-thumb">
-                                <img src="images/icon_1.png" alt="logo" class="logo"/>
-                            </div>
-                            <div class=" am-u-sm-6 am-list-main" >
-                                <h3 class="am-list-item-hd"><a href="" class="title">优步</a></h3>
-                                <div class="am-list-item-text green">优步打车20元优惠</div>
-                                <div class="am-list-item-text gray"> <span class="border_radius fenxiang">分享</span> 剩余金额2666元</div>
-                            </div>
-                            <span class="am-u-sm-3 am-list-news-more am-fr money green">￥3.5 <i class="am-header-icon am-icon-chevron-right gray"></i></span>
-                        </li>
-                       <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left am-text-middle">
-                            <div class="am-u-sm-3 am-list-thumb">
-                                <img src="images/icon_2.png" alt="logo" class="logo" />
-                            </div>
-                            <div class=" am-u-sm-6 am-list-main" >
-                                <h3 class="am-list-item-hd"><a href="" class="title">优步</a></h3>
-                                <div class="am-list-item-text green">优步打车20元优惠</div>
-                                <div class="am-list-item-text gray"> <span class="border_radius fenxiang">分享</span> 剩余金额2666元</div>
-                            </div>
-                            <span class="am-u-sm-3 am-list-news-more am-fr money green">￥3.5 <i class="am-header-icon am-icon-chevron-right gray"></i></span>
-                        </li>
-                      </ul>
-                  </div>
-                </div>
-            </div>
+      <div class="content" id="my_task_detail">
+            
        </div>
   </div>
+  <script type="text/template" id="my_task_detail_tempalte">
+    <div data-am-widget="list_news" class="am-list-news " >
+            <!--列表标题-->
+        <div class="am-list-news-bd">
+            <ul class="am-list">
+               <!--缩略图在标题左边-->
+                <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left am-text-middle">
+                    <div class="am-u-sm-3 am-list-thumb">
+                        <img src="{{config.file_server}}/view/${data.advertisement.icon}.do" alt="logo" class="logo"/>
+                    </div>
+                    <div class=" am-u-sm-6 am-list-main" >
+                        <h3 class="am-list-item-hd am-text-truncate"><a href="" class="title">${data.advertisement.title}</a></h3>
+                        <div class="am-list-item-text green am-text-truncate">${data.advertisement.simpleDescript}</div>
+                        <div class="am-list-item-text gray">
+                        ${if data.advertisement.type.code="fen_xiang"}
+                        <span class="border_radius fenxiang">分享</span>
+                        ${else if data.advertisement.type.code="xia_zai"}
+                        <span class="border_radius xiazai">下载</span>
+                        ${else if data.advertisement.type.code="guan_zhu"}
+                        <span class="border_radius guanzhu">关注</span>
+                        ${/if}
+                        任务奖金${data.advertisement.userProportion | moneyFormat}元</div>
+                    </div>
+                    <span class="am-u-sm-3 am-list-news-more am-fr money gray">已结束</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="line_height"></div>
+    <div data-am-widget="intro" class="am-intro am-cf am-intro-default" style="padding-top: 10px">
+        <!-- 时间轴日志 -->
+        <div id="timeline">
+           <ul id="dates">
+              ${each data.logs}
+              <li>
+                ${$value.remark | taskFormat}
+              </li>
+              ${/each}
+           </ul>
+           <ul id="issues">
+              ${each data.logs}
+              <li id="date1">
+                 ${$value.createTime | dateFormat}
+              </li>
+              ${/each}
+              
+           </ul>
+        </div>
+    </div>
+    <div class="line_height"></div>
+    <div data-am-widget="intro" class="am-intro am-cf am-intro-default task_txt" style="padding-top:0" >
+      <div class="list_title_line">
+         <div>您可能感兴趣的</div>
+      </div>
+        <div data-am-widget="list_news" class="am-list-news ">
+        <!--列表标题-->
+        <div class="am-list-news-bd">
+            <ul class="am-list">
+               <!--缩略图在标题左边-->
+              ${each data.advertisements}
+                <li id="${$value.id}" class="task_item am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left am-text-middle">
+                  <div class="am-u-sm-3 am-list-thumb">
+                      <img src="{{config.file_server}}/view/${$value.icon}.do" alt="logo" class="logo"/>
+                  </div>
+                  <div class=" am-u-sm-6 am-list-main" >
+                      <h3 class="am-list-item-hd am-text-truncate"><a href="javascript:void(0)" class="title">${$value.title}</a></h3>
+                      <div class="am-list-item-text green am-text-truncate">${$value.simpleDescript}</div>
+                      <div class="am-list-item-text gray">
+                      ${if $value.type.code=="fen_xiang"}
+                      <span class="border_radius fenxiang">分享</span>
+                      ${else if $value.type.code=="xia_zai"}
+                      <span class="border_radius xiazai">下载</span>
+                      ${else if $value.type.code=="guan_zhu"}
+                      <span class="border_radius 关注">关注</span>
+                      ${/if}
+                      剩余${$value.surplusMoney | moneyFormat}元</div>
+                  </div>
+                  <span class="am-u-sm-3 am-list-news-more am-fr money green">￥${$value.money | moneyFormat} </span>
+              </li>  
+              ${/each}
+              </ul>
+          </div>
+        </div>
+    </div>
+  </script>
+  <script type="text/javascript" src="http://cdn.weiyunmei.cn/js/plugins/jquery.timelinr.js"></script>
+  <script type="text/javascript" src="{{config.url}}/js/business/my_task_details.js"></script>
 </body>
 </html>
